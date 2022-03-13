@@ -1,4 +1,5 @@
 from .default import *
+import logging
 
 Case = namedtuple('Case',['name','val'])
 Batch = namedtuple('Batch',['name','val'])
@@ -66,12 +67,21 @@ def parsing(batch_script, epochs_data):
             return {'+':plus,'-':minus} 
 
         def timepoint_parser(timepoint_str_list):
-            interval = 1000//epochs_data.info['sample_rate']
+            actual_timepoints = epochs_data.info['timepoints']['all']
             timepoint_list = []
             for timepoint_str in timepoint_str_list:
                 if '~' in timepoint_str:
                     start,end = timepoint_str.split('~')
-                    timepoint_list += list(np.arange(int(start),int(end)+interval,interval).astype(int))
+                    if len(actual_timepoints) == 0:
+                        logging.warning(f"You are trying to pick a range of timepoints ({timepoint_str}) from epoch with empty timepoints list.")
+                        return []
+                    if int(start) < actual_timepoints[0]:
+                        logging.debug(f"You are trying to pick timepoints outside of your range - start [{start}] is before first epoch timepoint [{actual_timepoints[0]}]")
+                    if int(end) > actual_timepoints[-1]:
+                        logging.debug(f"You are trying to pick timepoints outside of your range - end [{end}] is before first epoch timepoint [{actual_timepoints[-1]}]")
+                    
+                    timepoints_in_range = [timepoint for timepoint in actual_timepoints if int(start) < timepoint < int(end)]
+                    timepoint_list.extend(timepoints_in_range)
                 else:
                     timepoint_list.append(int(timepoint_str))
 
