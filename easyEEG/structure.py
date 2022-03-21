@@ -168,7 +168,9 @@ class Analyzed_data():
         self.analysis_name = analysis_name
         self.data = data
         self.annotation = annotation
-        self.annotation.name = 'annotation'
+        if annotation:
+            print("Setting annotation")
+            self.annotation.name = 'annotation'
         self.default_plot_params = default_plot_params
         self.supplement = supplement
 
