@@ -171,6 +171,8 @@ class Analyzed_data():
         if annotation:
             print("Setting annotation")
             self.annotation.name = 'annotation'
+        else:
+            print("No annotation set")
         self.default_plot_params = default_plot_params
         self.supplement = supplement
 
