@@ -168,6 +168,8 @@ class Analyzed_data():
         self.analysis_name = analysis_name
         self.data = data
         self.annotation = annotation
+        print('**In init:')
+        print(annotation)
         if annotation:
             print("Setting annotation")
             self.annotation.name = 'annotation'
