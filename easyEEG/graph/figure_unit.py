@@ -254,12 +254,15 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
     else:
         ax.set_aspect(len(xticklabels) / 40)
 
-    # ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
-
-    #specify format of floats for y ticks labels
-    print(data.name)
-    y_labels = [item.get_text() for item in ax.get_yticklabels()]
-    ax.set_yticklabels([str(round(float(label), 2)) for label in y_labels if label != ''], rotation=0, fontname='Consolas')
+    name = None
+    if name == 'Time_frequency':
+        # specify format of floats for y ticks labels
+        print(data.name)
+        y_labels = [item.get_text() for item in ax.get_yticklabels()]
+        ax.set_yticklabels([str(round(float(label), 2)) for label in y_labels if label != ''], rotation=0,
+                           fontname='Consolas')
+    else:
+        ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
 
     cbar_ax.set_title(plot_params['cbar_title'])
 
