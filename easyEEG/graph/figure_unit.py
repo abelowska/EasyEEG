@@ -212,7 +212,7 @@ def plot_spectrum(data, plot_params={'err_style': 'ci_band', 'color': "Set1"}, a
     refine_axis(data.name, xticklabels, plot_params, ax)
 
 
-def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True),  'vmin':-1, 'vmax':2}, ax=None):
+def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True)}, ax=None):
     if ax is None:
         fig = plt.figure()
         ax = fig.add_subplot(111)
@@ -238,12 +238,12 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
 
     if 'cbar_values' in plot_params:
         cmap = cmap_discretize(plot_params['color'], len(plot_params['cbar_values']))
-        sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap,  vmin=plot_params['vmin'], vmax=plot_params['vmax'])
+        sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
         cb_yticks = cbar_ax.get_yticks()
         cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
         cbar_ax.set_yticklabels(plot_params['cbar_values'])
     else:
-        sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'], vmin=plot_params['vmin'], vmax=plot_params['vmax'])
+        sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
 
     xticklabels = data.columns
 
@@ -257,6 +257,7 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
     # ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
 
     #specify format of floats for y ticks labels
+    print(data.name)
     y_labels = [item.get_text() for item in ax.get_yticklabels()]
     ax.set_yticklabels([str(round(float(label), 2)) for label in y_labels if label != ''], rotation=0, fontname='Consolas')
 
