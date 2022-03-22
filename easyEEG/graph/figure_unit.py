@@ -74,17 +74,23 @@ def heatmap_significant(pv_data, sig_limit=0.05, ax=None):
                     for row_index, row in pv_data.iterrows() for col_index, cell in row.iteritems()
                     if cell < sig_limit]
 
-    len_ = pv_data.columns.size
-    index = 0
+    len_x = pv_data.columns.size
+    len_y = pv_data.index.size
+    index_x = 0
+    index_y = 0
 
     for x, y in significance:
-        for i in range(0, len_):
+        for i in range(0, len_x):
             if x == pv_data.columns[i]:
-                index = i
+                index_x = i
+
+        for i in range(0, len_y):
+            if y == pv_data.index[i][0]:
+                index_y = i
         ax.add_patch(Rectangle(
             (
-                index,
-                pv_data.index.get_level_values('freq').max() - y
+                index_x,
+                pv_data.index.get_level_values('freq').max() - index_y
             ),
             -1,
             1,
