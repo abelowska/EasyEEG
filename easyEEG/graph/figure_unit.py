@@ -219,7 +219,7 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
         # ax = fig.add_subplot(111)
         ax = plt.subplot(111)
 
-    cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
+    # cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
     name = data.name
     if 're_assign' in plot_params:
         # if 'cbar_values' not in plot_params:
@@ -239,18 +239,19 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
         data.index = [' '.join(i.split(' ')[1:]) for i in data.index]
 
     if 'cbar_values' in plot_params:
-        cmap = cmap_discretize(plot_params['color'], len(plot_params['cbar_values']))
-        sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
-        cb_yticks = cbar_ax.get_yticks()
-        cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
-        cbar_ax.set_yticklabels(plot_params['cbar_values'])
+        # cmap = cmap_discretize(plot_params['color'], len(plot_params['cbar_values']))
+        # sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
+        # cb_yticks = cbar_ax.get_yticks()
+        # cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
+        # cbar_ax.set_yticklabels(plot_params['cbar_values'])
+        pass
     else:
         if plot_params['vmin'] & plot_params['vmax']:
             sns.heatmap(data, ax=ax,
                         # cbar_ax=cbar_ax,
                         cmap=plot_params['color'], vmin=plot_params['vmin'], vmax=plot_params['vmax'])
         else:
-            sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
+            # sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
 
 
 
