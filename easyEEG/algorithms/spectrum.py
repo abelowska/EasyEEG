@@ -83,7 +83,7 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
         def cwt(name, data):
             if mother_wavelet == 'morlet':
                 cwt_result = np.abs(signal.cwt(
-                    data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))
+                    data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))**2
             else:
                 cwt_result = signal.cwt(
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
@@ -110,7 +110,7 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
         def cwt(name, data):
             if mother_wavelet == 'morlet':
                 cwt_result = np.abs(signal.cwt(
-                    data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))
+                    data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))**2
             else:
                 cwt_result = signal.cwt(
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
