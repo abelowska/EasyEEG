@@ -94,7 +94,7 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
             cwt_result = pd.DataFrame(cwt_result, columns=data.columns)
             cwt_result.index = pd.MultiIndex.from_tuples(
-                [(name[0], name[1], i) for i in frequency[::-1]], names=('condition_group', 'channel_group', 'freq'))
+                [(name[0], name[1], i) for i in frequency[0::]], names=('condition_group', 'channel_group', 'freq'))
             return cwt_result
 
         tf_df = convert(case_raw_data, ['condition_group', 'channel_group'], cwt)
@@ -125,7 +125,7 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
             cwt_result = pd.DataFrame(cwt_result, columns=data.columns)
             cwt_result.index = pd.MultiIndex.from_tuples(
-                [(name[0], name[1], name[2], i) for i in frequency[::-1]],
+                [(name[0], name[1], name[2], i) for i in frequency[0::]],
                 names=('condition_group', 'channel_group', 'subject', 'freq'))
             return cwt_result
 
