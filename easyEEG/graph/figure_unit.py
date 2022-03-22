@@ -90,7 +90,7 @@ def heatmap_significant(pv_data, sig_limit=0.05, ax=None):
         ax.add_patch(Rectangle(
             (
                 index_x,
-                index_y + 1
+                index_y,
             ),
             1,
             1,
