@@ -57,24 +57,23 @@ def Spectrum(self, compare=False, freq_span=(0, 30), target='power', comparison_
 
 
 # grand average
-def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morlet', steps=13, w=6):
+def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morlet', w=6, steps=20, log=False, square=False):
     if freq_span[0] == 0:
         freq_span[0] = freq_span[0] + 0.001
 
+    # whether frequencies should be distributed logarithmically or linear
+    if log & steps != 0:
+        frequency = np.geomspace(freq_span[0], freq_span[1], steps)
+    else:
+        frequency = np.arange(freq_span[0], freq_span[1])
+
     if mother_wavelet == 'morlet':
         sampling_rate = 256
-        w = w
-        # nfreqbin = sampling_rate // 2
-
         # widths
-        frequency = np.arange(freq_span[0], freq_span[1])
-        # frequency = np.geomspace(freq_span[0], freq_span[1], steps)
-        # frequency = np.linspace(freq_span[0], freq_span[1], nfreqbin)
         widths = w * sampling_rate / (2 * frequency * np.pi)
 
     else:
         # widths
-        frequency = np.arange(freq_span[0], freq_span[1])
         widths = frequency
 
     # with the decorator, we can just focuse on case data instead of batch/collection data
@@ -82,8 +81,12 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
     def to_tf(case_raw_data):
         def cwt(name, data):
             if mother_wavelet == 'morlet':
-                cwt_result = np.abs(signal.cwt(
-                    data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))**2
+                if square:
+                    cwt_result = np.abs(signal.cwt(
+                        data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))**2
+                else:
+                    cwt_result = np.abs(signal.cwt(
+                        data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))
             else:
                 cwt_result = signal.cwt(
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
@@ -109,8 +112,12 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
     def to_tf_group_level(case_raw_data):
         def cwt(name, data):
             if mother_wavelet == 'morlet':
-                cwt_result = np.abs(signal.cwt(
-                    data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))**2
+                if square:
+                    cwt_result = np.abs(signal.cwt(
+                        data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w)) ** 2
+                else:
+                    cwt_result = np.abs(signal.cwt(
+                        data=np.array(data)[0], wavelet=signal.morlet2, widths=widths, w=w))
             else:
                 cwt_result = signal.cwt(
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
