@@ -90,14 +90,14 @@ def heatmap_significant(pv_data, sig_limit=0.05, ax=None):
         ax.add_patch(Rectangle(
             (
                 index_x,
-                pv_data.index.get_level_values('freq').max() - index_y
+                pv_data.index.size - 1 - index_y
             ),
-            -1,
+            1,
             1,
             edgecolor='black',
             linewidth=1,
             alpha=0.7,
-            fill=False,)
+            fill=False, )
         )
 
     # for x, y in significance:
