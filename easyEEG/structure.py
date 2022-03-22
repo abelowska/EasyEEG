@@ -168,13 +168,8 @@ class Analyzed_data():
         self.analysis_name = analysis_name
         self.data = data
         self.annotation = annotation
-        print('**In init:')
-        print(annotation)
-        if annotation:
-            print("Setting annotation")
+        if annotation is not None:
             self.annotation.name = 'annotation'
-        else:
-            print("No annotation set")
         self.default_plot_params = default_plot_params
         self.supplement = supplement
 

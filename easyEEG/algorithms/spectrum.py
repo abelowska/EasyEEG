@@ -56,8 +56,6 @@ def Time_frequency(self, compare=False, freq_span=(0, 30)):
     else:
         widths = freqs
 
-    print("BUBA")
-
     # with the decorator, we can just focuse on case data instead of batch/collection data
     @self.iter('average')
     def to_tf(case_raw_data):
