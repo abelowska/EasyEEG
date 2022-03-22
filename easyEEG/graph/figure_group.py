@@ -33,7 +33,8 @@ def plot(self, plot_params=None, save=False, return_fig=False):
     'preparing the canvas'
     fig = plt.figure(figsize=(fig_x, fig_y))
     if plot_params['plot_type'][0] == 'direct':
-        ax = fig.add_subplot(111)
+        # ax = fig.add_subplot(111)
+        ax = plt.subplot()
         select_subplot_type(plot_params['plot_type'][1], ax, self.data, self.annotation, plot_params)
     elif plot_params['plot_type'][0] == 'matrix':
         matrix_plot(self.data, plot_params['x_title'], plot_params['y_title'], 

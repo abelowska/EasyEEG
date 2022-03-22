@@ -214,8 +214,9 @@ def plot_spectrum(data, plot_params={'err_style': 'ci_band', 'color': "Set1"}, a
 
 def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True)}, ax=None):
     if ax is None:
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
+        plt.figure()
+        # ax = fig.add_subplot(111)
+        ax = plt.subplot(111)
 
     cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
     name = data.name
