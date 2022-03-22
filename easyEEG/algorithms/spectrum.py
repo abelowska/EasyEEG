@@ -62,7 +62,7 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
         freq_span[0] = freq_span[0] + 0.001
 
     # whether frequencies should be distributed logarithmically or linear
-    if log & steps != 0:
+    if log & (steps != 0):
         print(f"IN LOG log: {log}, steps:{steps}")
         frequency = np.geomspace(freq_span[0], freq_span[1], steps)
     else:
