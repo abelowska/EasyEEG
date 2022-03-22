@@ -67,7 +67,8 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
         # nfreqbin = sampling_rate // 2
 
         # widths
-        frequency = np.geomspace(freq_span[0], freq_span[1], steps)
+        frequency = np.arange(freq_span[0], freq_span[1])
+        # frequency = np.geomspace(freq_span[0], freq_span[1], steps)
         # frequency = np.linspace(freq_span[0], freq_span[1], nfreqbin)
         widths = w * sampling_rate / (2 * frequency * np.pi)
 
