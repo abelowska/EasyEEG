@@ -252,6 +252,7 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
                         cmap=plot_params['color'], vmin=plot_params['vmin'], vmax=plot_params['vmax'])
         else:
             # sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
+            pass
 
 
 
@@ -274,7 +275,7 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
     else:
         ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
 
-    cbar_ax.set_title(plot_params['cbar_title'])
+    # cbar_ax.set_title(plot_params['cbar_title'])
 
     if 'grid' in plot_params and plot_params['grid']:
         for i in ax.get_xticks():
