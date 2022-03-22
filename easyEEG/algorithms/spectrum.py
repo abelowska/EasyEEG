@@ -57,13 +57,13 @@ def Spectrum(self, compare=False, freq_span=(0, 30), target='power', comparison_
 
 
 # grand average
-def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morlet', steps=13):
+def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morlet', steps=13, w=6):
     if freq_span[0] == 0:
         freq_span[0] = freq_span[0] + 0.001
 
     if mother_wavelet == 'morlet':
         sampling_rate = 256
-        w = 6
+        w = w
         # nfreqbin = sampling_rate // 2
 
         # widths
