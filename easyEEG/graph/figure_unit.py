@@ -244,7 +244,7 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
         cbar_ax.set_yticklabels(plot_params['cbar_values'])
     else:
         if plot_params['vmin'] & plot_params['vmax']:
-            sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'], vmin=plot_params['vmin'], vmax=plot_params['vmin'])
+            sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'], vmin=plot_params['vmin'], vmax=plot_params['vmax'])
         else:
             sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
 
