@@ -212,14 +212,13 @@ def plot_spectrum(data, plot_params={'err_style': 'ci_band', 'color': "Set1"}, a
     refine_axis(data.name, xticklabels, plot_params, ax)
 
 
-def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True)}, ax=None):
+def plot_heatmap(data, analysis_name=None, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True)}, ax=None):
     if ax is None:
         print("In heatmap none ax")
-        plt.figure()
-        # ax = fig.add_subplot(111)
-        ax = plt.subplot(111)
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
 
-    # cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
+    cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
     name = data.name
     if 're_assign' in plot_params:
         # if 'cbar_values' not in plot_params:
@@ -239,22 +238,19 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
         data.index = [' '.join(i.split(' ')[1:]) for i in data.index]
 
     if 'cbar_values' in plot_params:
-        # cmap = cmap_discretize(plot_params['color'], len(plot_params['cbar_values']))
-        # sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
-        # cb_yticks = cbar_ax.get_yticks()
-        # cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
-        # cbar_ax.set_yticklabels(plot_params['cbar_values'])
-        pass
+        cmap = cmap_discretize(plot_params['color'], len(plot_params['cbar_values']))
+        sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
+        cb_yticks = cbar_ax.get_yticks()
+        cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
+        cbar_ax.set_yticklabels(plot_params['cbar_values'])
     else:
         if plot_params['vmin'] & plot_params['vmax']:
             sns.heatmap(data, ax=ax,
-                        # cbar_ax=cbar_ax,
+                        cbar_ax=cbar_ax,
                         cmap=plot_params['color'], vmin=plot_params['vmin'], vmax=plot_params['vmax'])
         else:
-            # sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
+            sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=plot_params['color'])
             pass
-
-
 
     xticklabels = data.columns
 
@@ -262,11 +258,12 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
 
     if len(xticklabels) < 40:
         ax.set_aspect(1)  # ratio between y_unit and x_unit
+    elif analysis_name is 'Time Frequency':
+        pass  # does not change aspect
     else:
         ax.set_aspect(len(xticklabels) / 40)
 
-    name = None
-    if name == 'Time_frequency':
+    if analysis_name is 'Time Frequency':
         # specify format of floats for y ticks labels
         print(data.name)
         y_labels = [item.get_text() for item in ax.get_yticklabels()]
@@ -275,7 +272,7 @@ def plot_heatmap(data, plot_params={'grid': True, 'color': sns.cubehelix_palette
     else:
         ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
 
-    # cbar_ax.set_title(plot_params['cbar_title'])
+    cbar_ax.set_title(plot_params['cbar_title'])
 
     if 'grid' in plot_params and plot_params['grid']:
         for i in ax.get_xticks():
