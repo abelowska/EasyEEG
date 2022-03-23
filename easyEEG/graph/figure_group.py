@@ -109,9 +109,9 @@ def float_plot(data, positions, plot_params, annotation=None, fig=None):
         axs.append(fig.add_axes([idx, 0, 0, 0]))
 
         if isinstance(annotation, pd.DataFrame):
-            select_subplot_type(plot_params['plot_type'][1], axs[idx], data, annotation_cells[data_name], plot_params)
+            select_subplot_type(plot_params['plot_type'][1], axs[idx], data, None, annotation_cells[data_name], plot_params)
         else:
-            select_subplot_type(plot_params['plot_type'][1], axs[idx], data, None, plot_params)
+            select_subplot_type(plot_params['plot_type'][1], axs[idx], data, None, None, plot_params)
         axs[idx].set_position([positions[data_name][0], positions[data_name][1], 0.3, 0.3])
         axs[idx].axis('off')
 
@@ -217,7 +217,7 @@ def matrix_plot(data, x_axis, y_axis, plot_params, annotation=None, fig=None):
         ax = plt.Subplot(fig, inner_grids_for_data[idx])
         fig.add_subplot(ax)
         select_subplot_type(plot_params['plot_type'][1], ax,
-                            data_cells[data_name], annotation_cells[data_name], plot_params)
+                            data_cells[data_name], None, annotation_cells[data_name], plot_params)
 
     'color_bar'
     inner_grids_for_cbar = gridspec.GridSpecFromSubplotSpec(row_N, 1, inner_grids[8], wspace=wspace, hspace=hspace)
