@@ -212,11 +212,11 @@ def plot_spectrum(data, plot_params={'err_style': 'ci_band', 'color': "Set1"}, a
     refine_axis(data.name, xticklabels, plot_params, ax)
 
 
-def plot_heatmap(data, analysis_name=None, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True)}, ax=None):
+def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cubehelix_palette(light=1, as_cmap=True)}, ax=None):
     if ax is None:
         print("In heatmap none ax")
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
+        plt.figure()
+        ax = plt.subplot(111)
 
     cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
     name = data.name
@@ -257,10 +257,13 @@ def plot_heatmap(data, analysis_name=None, plot_params={'grid': True, 'color': s
     refine_axis(data.name, xticklabels, plot_params, ax)
 
     if len(xticklabels) < 40:
+        print("len < 40")
         ax.set_aspect(1)  # ratio between y_unit and x_unit
     elif analysis_name is 'Time Frequency':
+        print("freq")
         pass  # does not change aspect
     else:
+        print("min ratio")
         ax.set_aspect(len(xticklabels) / 40)
 
     if analysis_name is 'Time Frequency':
