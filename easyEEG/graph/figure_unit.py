@@ -256,17 +256,19 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
 
     refine_axis(data.name, xticklabels, plot_params, ax)
 
+    print(f" ANALYZIS NAME IN UNIT: {analysis_name}")
+
     if len(xticklabels) < 40:
         print("len < 40")
         ax.set_aspect(1)  # ratio between y_unit and x_unit
-    elif analysis_name is 'Time Frequency':
+    elif analysis_name == 'Time Frequency':
         print("freq")
         pass  # does not change aspect
     else:
         print("min ratio")
         ax.set_aspect(len(xticklabels) / 40)
 
-    if analysis_name is 'Time Frequency':
+    if analysis_name == 'Time Frequency':
         # specify format of floats for y ticks labels
         print(data.name)
         y_labels = [item.get_text() for item in ax.get_yticklabels()]
