@@ -1,3 +1,8 @@
+from matplotlib import pyplot as plt
+import seaborn as sns
+import numpy as np
+import matplotlib
+import scipy
 from matplotlib.ticker import FormatStrFormatter
 
 from ..default import *
