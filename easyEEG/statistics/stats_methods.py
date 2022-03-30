@@ -1,10 +1,11 @@
-from random import random
+import random
 
 import numpy as np
-import scipy
 import statsmodels
 from numpy import mean
 from permute.core import two_sample
+from scipy.stats import ttest_rel
+from statsmodels.sandbox.stats.multicomp import multipletests
 
 from ..default import *
 
@@ -19,7 +20,7 @@ def multiple_comparison_correction(pvs, method='fdr_bh'):
                     v[idx] = level
             return v[1:-1]
     else:
-        correct = lambda v: statsmodels.sandbox.stats.multicomp.multipletests(v, 0.05, method)[1]
+        correct = lambda v: multipletests(v, 0.05, method)[1]
 
     pvs_new = pd.DataFrame([correct(i) for i in pvs.values], index=pvs.index, columns=pvs.columns)
     pvs_new.name = pvs.name
@@ -29,7 +30,7 @@ def multiple_comparison_correction(pvs, method='fdr_bh'):
 
 def t_test(values):
     a, b = values
-    t, pv = scipy.stats.ttest_rel(a, b)
+    t, pv = ttest_rel(a, b)
     return {'pvalue': pv, 'effect': t}
 
 
