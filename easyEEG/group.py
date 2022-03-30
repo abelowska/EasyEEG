@@ -9,6 +9,32 @@ Case = namedtuple('Case', ['name', 'val'])
 Batch = namedtuple('Batch', ['name', 'val'])
 
 
+def timepoint_parser(timepoint_str_list, epochs_data):
+    actual_timepoints = epochs_data.info['timepoints']['all']
+    timepoint_list = []
+    for timepoint_str in timepoint_str_list:
+        if '~' in timepoint_str:
+            start, end = timepoint_str.split('~')
+            if len(actual_timepoints) == 0:
+                logging.warning(
+                    f"You are trying to pick a range of timepoints ({timepoint_str}) from epoch with empty timepoints list.")
+                return []
+            if int(start) < actual_timepoints[0]:
+                logging.debug(
+                    f"You are trying to pick timepoints outside of your range - start [{start}] is before first epoch timepoint [{actual_timepoints[0]}]")
+            if int(end) > actual_timepoints[-1]:
+                logging.debug(
+                    f"You are trying to pick timepoints outside of your range - end [{end}] is before first epoch timepoint [{actual_timepoints[-1]}]")
+
+            timepoints_in_range = [timepoint for timepoint in actual_timepoints if
+                                   int(start) <= timepoint <= int(end)]
+            timepoint_list.extend(timepoints_in_range)
+        else:
+            timepoint_list.append(int(timepoint_str))
+
+    return timepoint_list
+
+
 def parsing(batch_script, epochs_data):
     def conditions_filter_by_factor(query_str):
         cond_format = epochs_data.info['conditions']['format']
@@ -71,31 +97,6 @@ def parsing(batch_script, epochs_data):
             if plus == []: plus = slice(None)
             return {'+': plus, '-': minus}
 
-        def timepoint_parser(timepoint_str_list):
-            actual_timepoints = epochs_data.info['timepoints']['all']
-            timepoint_list = []
-            for timepoint_str in timepoint_str_list:
-                if '~' in timepoint_str:
-                    start, end = timepoint_str.split('~')
-                    if len(actual_timepoints) == 0:
-                        logging.warning(
-                            f"You are trying to pick a range of timepoints ({timepoint_str}) from epoch with empty timepoints list.")
-                        return []
-                    if int(start) < actual_timepoints[0]:
-                        logging.debug(
-                            f"You are trying to pick timepoints outside of your range - start [{start}] is before first epoch timepoint [{actual_timepoints[0]}]")
-                    if int(end) > actual_timepoints[-1]:
-                        logging.debug(
-                            f"You are trying to pick timepoints outside of your range - end [{end}] is before first epoch timepoint [{actual_timepoints[-1]}]")
-
-                    timepoints_in_range = [timepoint for timepoint in actual_timepoints if
-                                           int(start) <= timepoint <= int(end)]
-                    timepoint_list.extend(timepoints_in_range)
-                else:
-                    timepoint_list.append(int(timepoint_str))
-
-            return timepoint_list
-
         def subject_parser(subject_str_list):
             subject_list = [int(i) for i in subject_str_list]
             return subject_list
@@ -133,7 +134,7 @@ def parsing(batch_script, epochs_data):
         val = [plus_minus(i) for i in val.split('&')]
 
         if key == 'timepoints':
-            val = [{'+': timepoint_parser(part['+']), '-': timepoint_parser(part['-'])}
+            val = [{'+': timepoint_parser(part['+'], epochs_data), '-': timepoint_parser(part['-'], epochs_data)}
                    for part in val]
         elif key == 'trials':
             val = [{'+': trial_parser(part['+']), '-': trial_parser(part['-'])}

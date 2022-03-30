@@ -6,6 +6,7 @@ from ..default import *
 from .. import structure
 from .basic import *
 from ..statistics import stats_methods
+from ..group import timepoint_parser
 
 import scipy.fftpack
 from scipy import signal
@@ -57,7 +58,7 @@ def Spectrum(self, compare=False, freq_span=(0, 30), target='power', comparison_
 
 
 # grand average
-def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morlet', w=6, steps=20, log=False, square=False):
+def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morlet', w=6, steps=20, log=False, square=False, selected_batch=None, epochs_data=None):
     if freq_span[0] == 0:
         freq_span[0] = freq_span[0] + 0.001
 
@@ -92,7 +93,13 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
             else:
                 cwt_result = signal.cwt(
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
+
             cwt_result = pd.DataFrame(cwt_result, columns=data.columns)
+
+            if selected_batch is not None:
+                timepoints_list = timepoint_parser(selected_batch, epochs_data)
+                cwt_result = cwt_result[timepoints_list]
+
             cwt_result.index = pd.MultiIndex.from_tuples(
                 [(name[0], name[1], i) for i in frequency[0::]], names=('condition_group', 'channel_group', 'freq'))
             return cwt_result
@@ -124,6 +131,11 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
                 cwt_result = signal.cwt(
                     data=np.array(data)[0], wavelet=signal.ricker, widths=widths)
             cwt_result = pd.DataFrame(cwt_result, columns=data.columns)
+
+            if selected_batch is not None:
+                timepoints_list = timepoint_parser(selected_batch, epochs_data)
+                cwt_result = cwt_result[timepoints_list]
+
             cwt_result.index = pd.MultiIndex.from_tuples(
                 [(name[0], name[1], name[2], i) for i in frequency[0::]],
                 names=('condition_group', 'channel_group', 'subject', 'freq'))
