@@ -52,7 +52,7 @@ def tanova(self,step_size='1ms',win_size='1ms',sample='mean',shuffle=500,strateg
 
     default_plot_params = dict(title='TANOVA',plot_type=['direct','heatmap'], x_len=12, re_assign=[(0,0.01,0.05,0.1,1),(4,3,2,1)], color=sns.cubehelix_palette(light=1, as_cmap=True), grid=True, x_title='time', y_title='condition_group',cbar_title='pvalue',cbar_values=['>0.1','<0.1','<0.05','<0.01'])
 
-    return structure.Analyzed_data('TANOVA', tanova_collection, annotation_collection, default_plot_params=default_plot_params)
+    return structure.AnalyzedData('TANOVA', tanova_collection, annotation_collection, default_plot_params=default_plot_params)
 
 def cosine_distance_dynamics(self):
     # with the decorator, we can just focuse on case data instead of batch/collection data
@@ -64,4 +64,4 @@ def cosine_distance_dynamics(self):
     cosine_distance_collection = calc()
 
     default_plot_params = dict(title='cosine_distance_dynamics', plot_type=['direct','waveform'], x_title='time', y_title='distance', color="Set1", style='darkgrid')
-    return structure.Analyzed_data('cosine distance dynamics', cosine_distance_collection, default_plot_params=default_plot_params)
+    return structure.AnalyzedData('cosine distance dynamics', cosine_distance_collection, default_plot_params=default_plot_params)

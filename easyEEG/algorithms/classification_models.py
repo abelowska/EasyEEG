@@ -99,4 +99,4 @@ def classification(self, step_size='1ms', win_size='1ms', sample='mean', run_mod
 
     default_plot_params = dict(title='Pattern classification',plot_type=['direct','heatmap'], x_len=12, re_assign=[(0,0.01,0.05,1),(3,2,1)], color=sns.cubehelix_palette(light=1, as_cmap=True), grid=True,  x_title='time', y_title='condition_group',cbar_title='pvalue',cbar_values=['>=0.05','<0.05','<0.01'])
 
-    return structure.Analyzed_data('Pattern classification', pvalue_batch, score_batch, [weight_batch], default_plot_params=default_plot_params)
+    return structure.AnalyzedData('Pattern classification', pvalue_batch, score_batch, [weight_batch], default_plot_params=default_plot_params)

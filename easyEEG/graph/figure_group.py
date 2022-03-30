@@ -62,7 +62,7 @@ def plot(self, plot_params=None, save=False, return_fig=False):
         return fig
 
 
-structure.Analyzed_data.plot = plot
+structure.AnalyzedData.plot = plot
 
 
 def select_subplot_type(subplot_type, ax, data, analysis_name, annotation, plot_params):

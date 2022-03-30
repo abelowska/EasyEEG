@@ -1,37 +1,9 @@
-import numpy as np
-import scipy
-import pandas as pd
-import seaborn as sns
-import matplotlib
-import matplotlib.pyplot as plt
-
-import mne
-
-# import scipy.io
-
-from scipy import stats
-import statsmodels
-import statsmodels.api as sm
-from statsmodels.formula.api import ols
-import permute
-from permute.core import two_sample
-
-import random
 # from random import sample
-import math
-import collections
-from collections import defaultdict
-from collections import OrderedDict
-from collections import Counter
-from collections import namedtuple
-import itertools
-import re
-import time
-import sys
-import os
 import warnings
 
-import ipdb
+import pandas as pd
+
+# import scipy.io
 
 
 ids = pd.IndexSlice

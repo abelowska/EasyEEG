@@ -1,5 +1,5 @@
 from ..default import *
-from ..structure import Epochs, Analyzed_data
+from ..structure import Epochs, AnalyzedData
 import pickle
 from scipy.io import loadmat
 
@@ -398,7 +398,7 @@ def load_AnalyzedData(filepath):
         if isinstance(annotation, pd.DataFrame):
             annotation.name = pickle.load(f)
 
-        return Analyzed_data(analysis_name, data, annotation, supplement, default_plot_params)
+        return AnalyzedData(analysis_name, data, annotation, supplement, default_plot_params)
 
 'copied a lot from MNE 0.14.1'
 def load_topolocs(f_path,ch_names):

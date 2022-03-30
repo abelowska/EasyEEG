@@ -30,7 +30,7 @@ def topography(self, step_size='1ms', win_size='1ms', sample='mean', sig_limit=0
 
     default_plot_params = dict(title='Topography', plot_type=['matrix', 'topograph'], zlim=minmax, color=plt.cm.jet, cbar_title='uV', chan_locs=self.info['xy_locs'], sig_limit=sig_limit, x_title='time', y_title='condition_group')
 
-    return structure.Analyzed_data('Topography', topo_batch, stats_data, default_plot_params=default_plot_params)
+    return structure.AnalyzedData('Topography', topo_batch, stats_data, default_plot_params=default_plot_params)
 
 def frequency_topography(self, step_size='1ms', win_size='1ms', sample='mean', sig_limit=0.05, target=10):
     if isinstance(target, (int, float)):
@@ -79,7 +79,7 @@ def frequency_topography(self, step_size='1ms', win_size='1ms', sample='mean', s
 
     default_plot_params = dict(title='Topography', plot_type=['matrix', 'topograph'], zlim=minmax, color=plt.cm.jet, cbar_title='Power', chan_locs=self.info['xy_locs'], sig_limit=sig_limit, x_title='time', y_title='condition_group')
 
-    return structure.Analyzed_data('Topography', topo_batch, stats_data, default_plot_params=default_plot_params)
+    return structure.AnalyzedData('Topography', topo_batch, stats_data, default_plot_params=default_plot_params)
 
 def significant_channels_count(self, step_size='1ms', win_size='1ms', sample='mean', sig_limit=0.05):
     @self.iter('average')
@@ -98,5 +98,5 @@ def significant_channels_count(self, step_size='1ms', win_size='1ms', sample='me
 
     default_plot_params = dict(title='significant_channels_count',plot_type=['direct','heatmap'], x_len=12, color=sns.cubehelix_palette(light=1, as_cmap=True), x_title='time', y_title='condition_group',cbar_title='Count')
 
-    return structure.Analyzed_data('significant_channels_count', signif_batch, default_plot_params=default_plot_params)
+    return structure.AnalyzedData('significant_channels_count', signif_batch, default_plot_params=default_plot_params)
     
