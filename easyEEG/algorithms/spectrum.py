@@ -97,7 +97,6 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
             cwt_result = pd.DataFrame(cwt_result, columns=data.columns)
 
             if selected_batch is not None:
-                print("IN select batch")
                 timepoints_list = timepoint_parser(selected_batch, epochs_data)
                 cwt_result = cwt_result.loc[:, (slice(None), timepoints_list)]
 
@@ -134,7 +133,6 @@ def Time_frequency(self, compare=False, freq_span=(0, 30), mother_wavelet='morle
             cwt_result = pd.DataFrame(cwt_result, columns=data.columns)
 
             if selected_batch is not None:
-                print("IN select batch")
                 timepoints_list = timepoint_parser(selected_batch, epochs_data)
                 cwt_result = cwt_result.loc[:, (slice(None), timepoints_list)]
 
