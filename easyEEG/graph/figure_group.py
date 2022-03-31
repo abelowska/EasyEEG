@@ -42,8 +42,12 @@ def plot(self, plot_params=None, save=False, return_fig=False):
     else:
         fig_y = 5
 
+    if 'dpi' in plot_params:
+        plt.rcParams['figure.dpi'] = plot_params['dpi']
+    else:
+        plt.rcParams['figure.dpi'] = 100
+
     'preparing the canvas'
-    plt.rcParams['figure.dpi'] = 100
     fig = plt.figure(figsize=(fig_x, fig_y))
     if plot_params['plot_type'][0] == 'direct':
         ax = fig.add_subplot(111)
