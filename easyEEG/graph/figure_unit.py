@@ -29,7 +29,7 @@ def cmap_discretize(cmap, N):
 def refine_axis(title, xticklabels, plot_params, ax):
     xticks = ax.get_xticks()
     #  or len(xticklabels) > 40
-    if len(xticks) >= 40:
+    if len(xticks) >= 10:
         if isinstance(xticklabels, pd.MultiIndex):
             xticklabels = xticklabels.get_level_values('time')
 
