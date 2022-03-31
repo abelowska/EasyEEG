@@ -102,7 +102,7 @@ def heatmap_significant(pv_data, sig_limit=0.05, ax=None):
             1,
             1,
             edgecolor='black',
-            linewidth=0.5,
+            linewidth=0.2,
             alpha=0.7,
             fill=False, )
         )
