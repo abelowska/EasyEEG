@@ -78,7 +78,7 @@ def plot(self, plot_params=None, save=False, return_fig=False):
         title = f'{title}.png'
         if isinstance(save, str):
             title = save
-        fig.savefig(title, transparent=True)
+        fig.savefig(title, transparent=True, bbox_inches='tight')
 
     'reset'
     sns.despine()
