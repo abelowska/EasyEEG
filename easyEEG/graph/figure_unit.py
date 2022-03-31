@@ -55,10 +55,10 @@ def refine_axis(title, xticklabels, plot_params, ax):
             xticklabels_fine += [xticklabels_fine[-1] + xticklabels_fine[-1] - xticklabels_fine[-2]]
 
         ax.set_xticks(xticks_fine)
-        ax.set_xticklabels(xticklabels_fine, rotation=45, fontname='Consolas', size='large')
+        ax.set_xticklabels(xticklabels_fine, rotation=45, fontname='Consolas', size='small')
     else:
         if ax.get_xticklabels()[0].get_text() != ax.get_xticklabels()[1].get_text():
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, fontname='Consolas', size='large')
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, fontname='Consolas', size='small')
 
     if 'x_title' in plot_params:
         ax.set_xlabel(plot_params['x_title'])
