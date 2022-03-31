@@ -49,6 +49,12 @@ def plot(self, plot_params=None, save=False, return_fig=False):
 
     'preparing the canvas'
     fig = plt.figure(figsize=(fig_x, fig_y))
+    plt.rcParams['ytick.labelsize'] = 5
+    plt.rcParams['xtick.labelsize'] = 5
+    plt.rcParams['axes.labelsize'] = 6
+    plt.rcParams["axes.edgecolor"] = ".15"
+    plt.rcParams["axes.linewidth"] = 0.4
+
     if plot_params['plot_type'][0] == 'direct':
         ax = fig.add_subplot(111)
         select_subplot_type(plot_params['plot_type'][1], ax, self.data, self.analysis_name, self.annotation,

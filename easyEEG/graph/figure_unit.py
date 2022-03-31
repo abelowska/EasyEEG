@@ -55,10 +55,10 @@ def refine_axis(title, xticklabels, plot_params, ax):
             xticklabels_fine += [xticklabels_fine[-1] + xticklabels_fine[-1] - xticklabels_fine[-2]]
 
         ax.set_xticks(xticks_fine)
-        ax.set_xticklabels(xticklabels_fine, rotation=45, fontname='Consolas', size='x-large')
+        ax.set_xticklabels(xticklabels_fine, rotation=45, fontname='Consolas')
     else:
         if ax.get_xticklabels()[0].get_text() != ax.get_xticklabels()[1].get_text():
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, fontname='Consolas', size='large')
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, fontname='Consolas')
 
     if 'x_title' in plot_params:
         ax.set_xlabel(plot_params['x_title'])
@@ -247,7 +247,7 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
         sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
         cb_yticks = cbar_ax.get_yticks()
         cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
-        cbar_ax.set_yticklabels(plot_params['cbar_values'], size='x-large')
+        cbar_ax.set_yticklabels(plot_params['cbar_values'])
     else:
         if plot_params['vmin'] & plot_params['vmax']:
             sns.heatmap(data, ax=ax,
@@ -272,11 +272,11 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
         # specify format of floats for y ticks labels
         y_labels = [item.get_text() for item in ax.get_yticklabels()]
         ax.set_yticklabels([str(round(float(label), 2)) for label in y_labels if label != ''], rotation=0,
-                           fontname='Consolas', size='x-large')
+                           fontname='Consolas')
     else:
-        ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas', size='x-large')
+        ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
 
-    cbar_ax.set_title(plot_params['cbar_title'], size='x-large')
+    cbar_ax.set_title(plot_params['cbar_title'])
 
     if 'grid' in plot_params and plot_params['grid']:
         for i in ax.get_xticks():
