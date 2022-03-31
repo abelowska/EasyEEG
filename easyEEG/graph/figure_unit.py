@@ -222,7 +222,6 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
         print("In heatmap none ax")
         plt.figure()
         ax = plt.subplot(111)
-    plt.rcParams['figure.dpi'] = 500
 
     cbar_ax = ax.get_figure().add_axes([0.95, 0.4, 0.01, 0.2])  # [left, bottom, width, height]
     name = data.name
@@ -242,7 +241,6 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
 
     if data.index.name and '_group' in data.index.name:
         data.index = [' '.join(i.split(' ')[1:]) for i in data.index]
-    plt.rcParams['figure.dpi'] = 500
 
     if 'cbar_values' in plot_params:
         cmap = cmap_discretize(plot_params['color'], len(plot_params['cbar_values']))
