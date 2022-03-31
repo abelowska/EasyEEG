@@ -10,7 +10,7 @@ from statsmodels.sandbox.stats.multicomp import multipletests
 from ..default import *
 
 
-def multiple_comparison_correction(pvs, method='fdr_bh'):
+def multiple_comparison_correction(pvs, both_domains, method='fdr_bh'):
     if method == 'cluster':
         def correct(v):
             level = 0.05
@@ -26,7 +26,7 @@ def multiple_comparison_correction(pvs, method='fdr_bh'):
     pvs_new = pd.DataFrame([correct(i) for i in pvs.values], index=pvs.index, columns=pvs.columns)
 
     # correct in the second (frequency) domain
-    if pvs.shape[0] > 2:
+    if (pvs.shape[0] > 2) and both_domains:
         frequency_wise_data = pvs_new.values.T
         pvs_frequency_corrected_data = np.array([correct(i) for i in frequency_wise_data]).T
         pvs_new = pd.DataFrame(pvs_frequency_corrected_data, index=pvs.index, columns=pvs.columns)

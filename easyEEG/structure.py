@@ -192,14 +192,14 @@ class AnalyzedData:
             print(self.annotation.head())
         return ''
 
-    def correct(self, on_annotation=False, method='fdr_bh'):
+    def correct(self, on_annotation=False, method='fdr_bh', both_domains=False):
         from .statistics.stats_methods import multiple_comparison_correction
         if on_annotation:
             return AnalyzedData(self.analysis_name, self.data,
-                                multiple_comparison_correction(self.annotation, method=method), self.supplement,
+                                multiple_comparison_correction(self.annotation, both_domains, method=method), self.supplement,
                                 self.default_plot_params)
         else:
-            return AnalyzedData(self.analysis_name, multiple_comparison_correction(self.data, method=method),
+            return AnalyzedData(self.analysis_name, multiple_comparison_correction(self.data, both_domains, method=method),
                                 self.annotation, self.supplement, self.default_plot_params)
 
     def save(self, filepath):
