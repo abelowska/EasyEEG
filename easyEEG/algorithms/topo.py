@@ -5,6 +5,7 @@ import seaborn as sns
 from ..default import *
 from .. import structure
 from .basic import *
+from ..group import timepoint_parser
 from ..statistics import stats_methods
 from scipy import signal
 
@@ -43,7 +44,7 @@ def topography(self, step_size='1ms', win_size='1ms', sample='mean', sig_limit=0
 
 
 def frequency_topography(self, step_size='1ms', win_size='1ms', sample='mean', sig_limit=0.05, target=10,
-                         mother_wavelet='morlet', log=False, steps=20, w=6):
+                         mother_wavelet='morlet', log=False, steps=20, w=6, selected_batch=None, epochs_data=None):
     if isinstance(target, (int, float)):
         freqs = [target]
     elif isinstance(target, list) and len(target) == 2 \
@@ -84,7 +85,10 @@ def frequency_topography(self, step_size='1ms', win_size='1ms', sample='mean', s
         cwt_result = pd.DataFrame(
             [cwt_result], index=data.index, columns=data.columns)
 
-        print(cwt_result)
+        if selected_batch is not None:
+            timepoints_list = timepoint_parser(selected_batch, epochs_data)
+            cwt_result = cwt_result.loc[:, (slice(None), timepoints_list)]
+
         return cwt_result
 
     @self.iter('average')
