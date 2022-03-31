@@ -102,7 +102,7 @@ def heatmap_significant(pv_data, sig_limit=0.05, ax=None):
             1,
             1,
             edgecolor='black',
-            linewidth=1,
+            linewidth=0.5,
             alpha=0.7,
             fill=False, )
         )
@@ -247,7 +247,7 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
         sns.heatmap(data, ax=ax, cbar_ax=cbar_ax, cmap=cmap)
         cb_yticks = cbar_ax.get_yticks()
         cbar_ax.yaxis.set_ticks([(cb_yticks[i] + cb_yticks[i + 1]) / 2 * 1.5 for i in range(len(cb_yticks) - 1)])
-        cbar_ax.set_yticklabels(plot_params['cbar_values'])
+        cbar_ax.set_yticklabels(plot_params['cbar_values'], size='small')
     else:
         if plot_params['vmin'] & plot_params['vmax']:
             sns.heatmap(data, ax=ax,
@@ -272,11 +272,11 @@ def plot_heatmap(data, analysis_name, plot_params={'grid': True, 'color': sns.cu
         # specify format of floats for y ticks labels
         y_labels = [item.get_text() for item in ax.get_yticklabels()]
         ax.set_yticklabels([str(round(float(label), 2)) for label in y_labels if label != ''], rotation=0,
-                           fontname='Consolas')
+                           fontname='Consolas', size='small')
     else:
-        ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas')
+        ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontname='Consolas', size='small')
 
-    cbar_ax.set_title(plot_params['cbar_title'])
+    cbar_ax.set_title(plot_params['cbar_title'], size='small')
 
     if 'grid' in plot_params and plot_params['grid']:
         for i in ax.get_xticks():
