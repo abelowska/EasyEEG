@@ -27,13 +27,9 @@ def multiple_comparison_correction(pvs, method='fdr_bh'):
 
     # correct in the second (frequency) domain
     if pvs.shape[0] > 2:
-        print('PVS shape greater than 2')
         frequency_wise_data = pvs_new.values.T
-        print(frequency_wise_data.shape)
         pvs_frequency_corrected_data = np.array([correct(i) for i in frequency_wise_data]).T
-
         pvs_new = pd.DataFrame(pvs_frequency_corrected_data, index=pvs.index, columns=pvs.columns)
-        print(f"in add correct {pvs_new}")
 
     pvs_new.name = pvs.name
 
