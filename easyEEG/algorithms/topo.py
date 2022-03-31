@@ -83,6 +83,8 @@ def frequency_topography(self, step_size='1ms', win_size='1ms', sample='mean', s
 
         cwt_result = pd.DataFrame(
             [cwt_result], index=data.index, columns=data.columns)
+
+        print(cwt_result)
         return cwt_result
 
     @self.iter('average')
