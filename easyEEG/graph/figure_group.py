@@ -50,9 +50,9 @@ def plot(self, plot_params=None, save=False, return_fig=False):
     'preparing the canvas'
     fig = plt.figure(figsize=(fig_x, fig_y))
     # parameters of plot
-    plt.rcParams['ytick.labelsize'] = 5
-    plt.rcParams['xtick.labelsize'] = 5
-    plt.rcParams['axes.labelsize'] = 7
+    plt.rcParams['ytick.labelsize'] = 9
+    plt.rcParams['xtick.labelsize'] = 9
+    plt.rcParams['axes.labelsize'] = 9
     plt.rcParams['axes.titlesize'] = 9
     plt.rcParams["axes.edgecolor"] = ".15"
     plt.rcParams["axes.linewidth"] = 0.4
