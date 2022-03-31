@@ -72,8 +72,10 @@ def plot(self, plot_params=None, save=False, return_fig=False):
 
     'output'
     plt.show()
+
+    title = plot_params['title']
     if save:
-        title = 'lala.png'
+        title = f'{title}.png'
         if isinstance(save, str):
             title = save
         fig.savefig(title, transparent=True)
