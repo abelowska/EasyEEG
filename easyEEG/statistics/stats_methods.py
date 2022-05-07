@@ -45,7 +45,7 @@ def t_test(values):
 def permutation_test(values, reps=1000, alternative='two-sided'):
     values = np.array(values)
     if len(values) == 2:
-        pv, t = two_sample(values[0], values[1], reps=reps, stat=lambda u, v: mean(u - v), alternative='two-sided')
+        pv, t = two_sample(values[0], values[1], reps=reps, stat=lambda u, v: mean(u - v), alternative=alternative)
         return {'pvalue': pv, 'effect': t}
     else:
         return None

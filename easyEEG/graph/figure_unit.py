@@ -149,7 +149,7 @@ def significant(pv_data, win, sig_limit=0.05, ax=None):
         cbar_ax, cmap=cmap, norm=norm, spacing='proportional', ticks=ticks, boundaries=bounds, format='%1i')
 
     cbar_ax.set_title('pvalue')
-    cbar_ax.set_yticklabels(['<0.05', '<0.01', '<0.001'])
+    cbar_ax.set_yticklabels(['<0.001', '<0.01', '<0.05'])
 
 
 def plot_waveform(data, plot_params={'err_style': 'ci_band', 'color': "Set1"}, ax=None):

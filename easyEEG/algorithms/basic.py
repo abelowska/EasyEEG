@@ -1,3 +1,8 @@
+from collections import defaultdict
+
+import numpy as np
+from tqdm.contrib import itertools
+
 from ..default import *
 from tqdm import tqdm
 from ..statistics import stats_methods
