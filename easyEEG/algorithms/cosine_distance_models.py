@@ -3,6 +3,8 @@ from .. import structure
 from .basic import * 
 from ..statistics import stats_methods
 
+import seaborn as sns
+
 from scipy.spatial.distance import cosine # 1-cosD
 
 def calc_cosD(df): # df: channel,subject,condition_group
