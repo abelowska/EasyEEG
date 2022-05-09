@@ -73,7 +73,7 @@ def plot(self, plot_params=None, save=False, return_fig=False):
     'output'
     plt.show()
 
-    title = plot_params['title'] if plot_params['title'] is not None else ""
+    # title = plot_params['title'] if plot_params['title'] is not None else ""
     if save:
         title = f'{title}.png'
         if isinstance(save, str):
